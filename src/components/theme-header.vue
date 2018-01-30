@@ -1,7 +1,10 @@
 <template>
     <ul>
+        <li>
+            <router-link :to="{ path: '/vue/wp/'}"> HOME </router-link>
+        </li>
         <li v-for="menu in menus">
-            <router-link :to="{ path: menu.url}"> {{ menu.title }} </router-link>
+            <router-link :to="{ path: base_path + menu.url }"> {{ menu.title }} </router-link>
         </li>
     </ul>
 </template>
@@ -9,7 +12,8 @@
 export default {
     data() {
         return {
-            menus: this.getMenu()
+            menus: this.getMenu(),
+            base_path: wp.base_path
         }
     },
     methods: {

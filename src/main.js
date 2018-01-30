@@ -1,6 +1,8 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import Vuex from 'vuex'
 
+Vue.use( Vuex );
 Vue.use(VueRouter);
 Vue.use(require('vue-resource'));
 
@@ -32,7 +34,21 @@ const router = new VueRouter({
   routes: routes
 });
 
+const store = new Vuex.Store( {
+	state: {
+		title: ''
+	},
+	mutations: {
+		changeTitle( state, value ) {
+			// mutate state
+			state.title = value;
+			document.title = ( state.title ? state.title + ' - ' : '' ) + wp.site_name;
+		}
+	}
+} );
+
 const app = new Vue({
+  store,
   router
 }).$mount('#app')
 
